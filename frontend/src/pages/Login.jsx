@@ -1,0 +1,24 @@
+import axios from "axios";
+import {useState} from "react"
+function login(){
+    const[email,setEmail]=useState("");
+    const[password,setPassword]=useState("");
+    const signup=async()=>{
+        const res=await axios.post(
+        "http://localhost:5000/api/auth/login",
+        {email,password}
+        )
+        localStorage.setItem("token",res.data.token)
+        window.location="/dashboard"
+    }
+
+    return(
+        <div>
+            <input placeholder="email" onChange={(e)=>setEmail(e.target.value)}/>
+            <input placeholder="password" onChange={(e)=>setPassword(e.target.value)}/>
+            <button onClick={login}>Login</button>
+
+        </div>
+    )
+}
+export default login;
